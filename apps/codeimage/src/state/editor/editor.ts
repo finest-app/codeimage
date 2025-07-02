@@ -1,9 +1,7 @@
-import type * as ApiTypes from '@codeimage/api/api-types';
 import {SUPPORTED_LANGUAGES} from '@codeimage/config';
 import {EditorConfigStore} from '@codeimage/store/editor/config.store';
 import {provideAppState} from '@codeimage/store/index';
 import {createUniqueId} from '@codeimage/store/plugins/unique-id';
-import {PresetData} from '@codeimage/store/presets/types';
 import type {Transaction} from '@codemirror/state';
 import {appEnvironment} from '@core/configuration';
 import {createEventBus} from '@solid-primitives/event-bus';
@@ -57,7 +55,6 @@ export function createEditorsStore() {
       setFontWeight: number;
       setShowLineNumbers: boolean;
       setFromPersistedState: PersistedEditorState;
-      setFromPreset: PresetData['editor'];
       setEnableLigatures: boolean;
     }>(),
   );
@@ -93,10 +90,6 @@ export function createEditorsStore() {
     .hold(store.commands.setEnableLigatures, (enable, {set}) =>
       set('options', 'enableLigatures', enable),
     )
-    .hold(store.commands.setFromPreset, presetData => {
-      store.set('options', presetData);
-      store.dispatch(editorUpdateCommand, void 0);
-    })
     .hold(store.commands.setFromPersistedState, (persistedState, {state}) => {
       const editors = (persistedState.editors ?? [])
         .slice(0, MAX_TABS)
@@ -237,27 +230,6 @@ export function createEditorsStore() {
     return font ?? configuredFonts()[0];
   };
 
-  const setFromWorkspace = (item: ApiTypes.GetProjectByIdApi['response']) => {
-    setEditors(
-      item.editorTabs.map(
-        editor =>
-          ({
-            tab: {
-              tabName: editor.tabName,
-            },
-            formatter: null,
-            languageId: editor.languageId,
-            id: editor.id,
-            code: editor.code,
-            lineNumberStart: editor.lineNumberStart ?? 1,
-          } as EditorState),
-      ),
-    );
-    store.set('activeEditorId', item.editorTabs[0].id);
-    store.set('options', item.editorOptions);
-    store.dispatch(editorUpdateCommand, void 0);
-  };
-
   const setEditorsWithCommand: SetStoreFunction<EditorState[]> = (
     ...args: unknown[]
   ) => {
@@ -286,7 +258,6 @@ export function createEditorsStore() {
       addEditor,
       removeEditor,
       setTabName,
-      setFromWorkspace,
       ...store.actions,
       setFontId(fontId: string) {
         store.actions.setFontId(fontId);

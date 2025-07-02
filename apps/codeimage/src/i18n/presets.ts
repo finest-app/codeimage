@@ -1,4 +1,5 @@
-import {guestLimit, userLimit} from '@codeimage/store/presets/bridge';
+const guestLimit = 10,
+  userLimit = 10;
 
 export const presets = {
   it: {

@@ -6,7 +6,9 @@ export const withLocalStorage = (storeName: string) => {
   return makePlugin(
     storeApi => {
       // TODO: add plugin storage
-      const initialState = localStorage.getItem(storeName);
+      const initialState = window.utools
+        ? window.utools.dbStorage.getItem(storeName)
+        : localStorage.getItem(storeName);
 
       if (initialState) {
         try {
@@ -20,10 +22,19 @@ export const withLocalStorage = (storeName: string) => {
       // TODO: add statebuilder utilities to override set with better typings
       storeApi.set = (...args: unknown[]): void => {
         const result = defaultSet(...(args as Parameters<typeof defaultSet>));
-        localStorage.setItem(
-          storeName,
-          JSON.stringify(untrack(() => storeApi())),
-        );
+
+        if (window.utools) {
+          window.utools.dbStorage.setItem(
+            storeName,
+            JSON.stringify(untrack(() => storeApi())),
+          );
+        } else {
+          localStorage.setItem(
+            storeName,
+            JSON.stringify(untrack(() => storeApi())),
+          );
+        }
+
         return result;
       };
 
