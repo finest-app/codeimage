@@ -159,7 +159,7 @@ export const locale = {
       unFocusCodeEditor: '取消聚焦代码编辑器',
       toggleBackground: '切换背景',
       toggleDarkMode: '切换暗色模式',
-      toggleHeader: '切换头部显示',
+      toggleHeader: '切换标题栏显示',
       toggleWatermark: '切换水印',
       changePadding: '更改边距',
       pickRandomTheme: '随机主题',

@@ -71,8 +71,8 @@ export const WindowStyleForm: ParentComponent = () => {
               value={terminal.state.showHeader}
               onChange={terminal.setShowHeader}
               items={[
-                {label: t('common.yes'), value: true},
-                {label: t('common.no'), value: false},
+                {label: t('common.show'), value: true},
+                {label: t('common.hide'), value: false},
               ]}
             />
           </SuspenseEditorItem>

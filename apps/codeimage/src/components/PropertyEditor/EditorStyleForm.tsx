@@ -310,8 +310,8 @@ export const EditorStyleForm: ParentComponent = () => {
                     value={state.options.enableLigatures}
                     onChange={setEnableLigatures}
                     items={[
-                      {label: t('common.yes'), value: true},
-                      {label: t('common.no'), value: false},
+                      {label: '启用', value: true},
+                      {label: '禁用', value: false},
                     ]}
                   />
                 </SuspenseEditorItem>

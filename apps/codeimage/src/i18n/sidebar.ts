@@ -9,7 +9,7 @@ export default {
       color: '颜色',
       background: '背景',
       terminal: '窗口',
-      header: '头部',
+      header: '标题栏',
       tabAccent: '选项卡高亮',
       watermark: '水印',
       shadows: '阴影',
