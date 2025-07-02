@@ -43,10 +43,10 @@ export function CustomColorPicker(props: CustomColorPickerProps) {
           alignItems={'center'}
           marginBottom={4}
         >
-          <Text weight={'semibold'}>Color</Text>
+          <Text weight={'semibold'}>颜色</Text>
           <IconButton
             size={'xs'}
-            aria-label={'Close'}
+            aria-label={'关闭'}
             theme={'secondary'}
             onClick={() => setOpen(false)}
           >

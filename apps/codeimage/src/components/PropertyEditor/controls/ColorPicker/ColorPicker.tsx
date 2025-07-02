@@ -1,5 +1,4 @@
 import {useI18n} from '@codeimage/locale';
-import {isAssetUrl} from '@codeimage/store/assets/assets';
 import {FlexField, VStack} from '@codeimage/ui';
 import {TextField} from '@codeui/kit';
 import {
@@ -19,7 +18,6 @@ import {
 } from 'solid-js';
 import {ColorPickerPresetItem} from './ColorPickerPresetItem';
 import * as styles from './CustomColorPicker.css';
-import {ImagePicker} from '../ImagePicker/ImagePicker';
 
 const enum ColorPickerSelectionMode {
   gradient = 'gradient',
@@ -50,21 +48,13 @@ export function ColorPickerPopover(props: VoidProps<ColorPickerPopoverProps>) {
         label: tUnsafe('colorPicker.color'),
         value: ColorPickerSelectionMode.color,
       },
-      {
-        label: tUnsafe('colorPicker.background'),
-        value: ColorPickerSelectionMode.background,
-      },
     ]);
 
   onMount(() => {
-    if (isAssetUrl(props.value)) {
-      setMode(ColorPickerSelectionMode.background);
+    if (props.colors?.includes(props.value ?? '')) {
+      setMode(ColorPickerSelectionMode.color);
     } else {
-      if (props.colors?.includes(props.value ?? '')) {
-        setMode(ColorPickerSelectionMode.color);
-      } else {
-        setMode(ColorPickerSelectionMode.gradient);
-      }
+      setMode(ColorPickerSelectionMode.gradient);
     }
   });
 
@@ -122,14 +112,6 @@ export function ColorPickerPopover(props: VoidProps<ColorPickerPopoverProps>) {
             )}
           </For>
         </div>
-      </Show>
-      <Show when={mode() === ColorPickerSelectionMode.background}>
-        <ImagePicker
-          value={props.value ?? undefined}
-          onChange={value =>
-            props.onChange((value || props.gradientColors?.[0]) ?? '')
-          }
-        />
       </Show>
     </VStack>
   );
