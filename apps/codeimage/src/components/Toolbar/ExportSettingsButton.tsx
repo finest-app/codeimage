@@ -4,11 +4,11 @@ import {ExportPopoverContent} from './ExportContent';
 
 export function ExportSettingsButton() {
   return (
-    <Tooltip content={'Export settings'} theme={'secondary'}>
+    <Tooltip content={'导出设置'} theme={'secondary'}>
       <Popover placement={'bottom-end'}>
         <PopoverTrigger
           as={IconButton}
-          aria-label={'hint'}
+          aria-label={'导出设置'}
           size={'xs'}
           theme={'secondary'}
         >

@@ -10,7 +10,7 @@ interface ExportButtonProps {
 }
 
 export const CopyToClipboardButton: Component<ExportButtonProps> = props => {
-  const label = () => 'Copy to clipboard';
+  const label = () => '复制到剪贴板';
 
   function copyToClipboard() {
     if (props.canvasRef) {
@@ -35,16 +35,15 @@ export const CopyToClipboardButton: Component<ExportButtonProps> = props => {
     <Tooltip
       content={
         <>
-          Your browser may not support the{' '}
+          您的浏览器可能不支持当前导出格式的{' '}
           <Link
             underline
             href={
               'https://developer.mozilla.org/en-US/docs/Web/API/Clipboard/write'
             }
           >
-            Clipboard API
-          </Link>{' '}
-          with the current export extension
+            剪贴板 API
+          </Link>
         </>
       }
       disabled={isSupported()}

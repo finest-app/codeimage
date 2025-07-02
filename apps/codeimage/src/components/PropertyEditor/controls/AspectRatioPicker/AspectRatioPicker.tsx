@@ -33,18 +33,17 @@ export function AspectRatioPicker(props: AspectRatioPickerProps) {
             )}
           </Show>
 
-          <Text weight={'semibold'}>{props.value ?? 'Auto'}</Text>
+          <Text weight={'semibold'}>{props.value ?? '自动'}</Text>
         </div>
       )}
       open={open()}
       onOpenChange={setOpen}
     >
       <SidebarPopoverTitle
-        experimental
-        featureName={'Aspect Ratio'}
+        featureName={'纵横比'}
         onClose={() => setOpen(false)}
       >
-        Aspect ratio
+        纵横比
       </SidebarPopoverTitle>
 
       <div class={styles.aspectRatioCardList}>
@@ -59,7 +58,7 @@ export function AspectRatioPicker(props: AspectRatioPickerProps) {
             })}
             class={styles.aspectRadioCardPreview}
           >
-            <Box marginY={3}>Auto</Box>
+            <Box marginY={3}>自动</Box>
           </div>
         </div>
 

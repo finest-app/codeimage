@@ -49,7 +49,6 @@ export function TerminalControlField(
                 textColor={terminalState.state.textColor}
                 background={terminalState.state.background}
                 accentVisible={props.showAccent}
-                readonlyTab={true}
                 showHeader={true}
                 showWatermark={false}
                 alternativeTheme={false}
@@ -85,7 +84,6 @@ export function TerminalControlField(
                   textColor={terminalState.state.textColor}
                   background={terminalState.state.background}
                   accentVisible={props.showAccent}
-                  readonlyTab={true}
                   showHeader={true}
                   showWatermark={false}
                   alternativeTheme={false}

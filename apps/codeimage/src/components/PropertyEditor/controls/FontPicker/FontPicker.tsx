@@ -58,48 +58,21 @@ export function FontPicker(props: FontPickerProps) {
       input={triggerProps => (
         <div class={styles.input} {...triggerProps}>
           <span class={styles.inputValue}>
-            {selectedFont()?.name ?? 'No font selected'}
+            {selectedFont()?.name ?? '未选择字体'}
           </span>
           <icons.SelectorIcon class={styles.inputIcon} />
         </div>
       )}
     >
       <SidebarPopoverTitle
-        experimental
-        featureName={'Font System Access API'}
+        featureName={'字体系统访问 API'}
         onClose={() => setOpen(false)}
       >
-        Fonts
+        字体
       </SidebarPopoverTitle>
 
       <DynamicSizedContainer>
-        <VStack spacing={2}>
-          <FlexField>
-            <SegmentedField<FontPickerModality>
-              value={mode()}
-              autoWidth
-              onChange={item => setMode(item)}
-              items={[
-                {label: 'Default', value: 'default'},
-                {label: 'System', value: 'system'},
-              ]}
-              size={'sm'}
-            />
-          </FlexField>
-
-          <Switch>
-            <Match when={mode() === 'default'}>
-              <Listbox bordered {...webListboxProps} />
-            </Match>
-            <Match when={mode() === 'system'}>
-              <FontSystemPicker
-                onEsc={() => setOpen(false)}
-                value={props.value}
-                onChange={value => props.onChange(value)}
-              />
-            </Match>
-          </Switch>
-        </VStack>
+        <Listbox bordered {...webListboxProps} />
       </DynamicSizedContainer>
     </SidebarPopover>
   );

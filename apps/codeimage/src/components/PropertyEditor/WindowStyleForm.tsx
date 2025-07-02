@@ -27,8 +27,8 @@ export const WindowStyleForm: ParentComponent = () => {
 
   const borderTypeSelect = createSelectOptions(
     [
-      {label: 'None', value: 'none'},
-      {label: 'Glass', value: 'glass'},
+      {label: '无', value: 'none'},
+      {label: '玻璃', value: 'glass'},
     ],
     {
       key: 'label',
@@ -51,8 +51,8 @@ export const WindowStyleForm: ParentComponent = () => {
               value={terminal.state.alternativeTheme}
               onChange={terminal.setAlternativeTheme}
               items={[
-                {label: 'Default', value: false},
-                {label: 'Alternative', value: true},
+                {label: '默认', value: false},
+                {label: '备选', value: true},
               ]}
             />
           </SuspenseEditorItem>

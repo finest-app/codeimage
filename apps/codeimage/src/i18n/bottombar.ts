@@ -8,9 +8,9 @@ export const bottomBar = {
   },
   en: {
     bottomBar: {
-      themes: 'Themes',
-      styles: 'Styles',
-      editor: 'Editor',
+      themes: '主题',
+      styles: '样式',
+      editor: '编辑器',
     },
   },
   de: {

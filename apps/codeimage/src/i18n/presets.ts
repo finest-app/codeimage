@@ -50,47 +50,46 @@ export const presets = {
   },
   en: {
     presets: {
-      userPresets: 'Your presets',
+      userPresets: '您的预设',
       updatePreset: {
-        label: 'Update',
-        dialogTitle: 'Update preset',
-        dialogMessage:
-          'Confirm to update the selected preset to the current editor state',
-        old: 'Old',
-        new: 'New',
+        label: '更新',
+        dialogTitle: '更新预设',
+        dialogMessage: '确认将所选预设更新到当前编辑器状态',
+        old: '旧',
+        new: '新',
       },
       share: {
-        label: 'Share',
-        confirm: 'Preset has been copied to clipboard',
+        label: '分享',
+        confirm: '预设已复制到剪贴板',
       },
       renamePreset: {
-        label: 'Rename',
-        confirmTitle: 'Rename preset',
-        confirmMessage: 'Enter a new name for the preset.',
+        label: '重命名',
+        confirmTitle: '重命名预设',
+        confirmMessage: '输入预设新名称。',
       },
       addPreset: {
-        label: 'Add preset',
-        confirmTitle: 'Add a new preset',
-        confirmMessage: 'Enter a name for your preset',
+        label: '添加预设',
+        confirmTitle: '添加新预设',
+        confirmMessage: '输入预设名称',
       },
       deletePreset: {
-        label: 'Delete',
-        confirmTitle: 'Delete preset',
-        confirmMessage: 'This action is not reversible.',
+        label: '删除',
+        confirmTitle: '删除预设',
+        confirmMessage: '此操作不可撤销。',
       },
       sync: {
-        label: 'Save in your account',
+        label: '保存到您的账户',
       },
       openPreset: {
-        label: 'Show your presets',
+        label: '显示您的预设',
       },
       limit: {
         user: {
-          label: `You reached the maximum number of ${userLimit} presets.`,
+          label: `您已达到每个用户最多 ${userLimit} 个预设的限制。`,
         },
         guest: {
-          label: `You reached the maximum number of ${guestLimit} presets.`,
-          actionLabel: `to increase your limits.`,
+          label: `您已达到最多 ${guestLimit} 个预设的限制。`,
+          actionLabel: `以提升限额。`,
         },
       },
     },

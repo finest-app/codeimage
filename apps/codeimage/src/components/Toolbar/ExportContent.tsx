@@ -32,10 +32,7 @@ export function ExportPopoverContent() {
   ];
 
   return (
-    <PopoverContent
-      title={'Export Settings'}
-      class={styles.exportContentPopover}
-    >
+    <PopoverContent title={'导出设置'} class={styles.exportContentPopover}>
       <DynamicSizedContainer>
         <div class={styles.exportContent}>
           <VStack spacing={'6'} marginTop={2} width={'100%'}>
@@ -110,7 +107,7 @@ export function ExportPopoverContent() {
                 justifyContent={'spaceBetween'}
                 alignItems={'center'}
               >
-                <Text size={'sm'}>Output resolution</Text>
+                <Text size={'sm'}>输出分辨率</Text>
                 <Box marginLeft={'auto'}>
                   {exportCanvasStore.canvasResolution()}
                 </Box>
@@ -121,7 +118,7 @@ export function ExportPopoverContent() {
               checked={exportCanvasStore.get.showOnlyActiveTab}
               onChange={exportCanvasStore.setShowOnlyActiveTab}
               size={'md'}
-              label={'(Export) Show only active tab'}
+              label={'（导出）仅显示活动选项卡'}
             />
           </VStack>
         </div>

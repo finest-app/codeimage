@@ -30,7 +30,7 @@ export function FrameToolbar(props: FrameToolbarProps) {
           leftIcon={<ColorSwatchIcon />}
           onClick={() => dispatchRandomTheme()}
         >
-          Randomize
+          随机主题
         </Button>
         <Button
           size={'xs'}
@@ -40,7 +40,7 @@ export function FrameToolbar(props: FrameToolbarProps) {
           disabled={!activeEditor.canFormat()}
           onClick={() => dispatchFormat()}
         >
-          Format
+          格式化
         </Button>
       </HStack>
     </div>

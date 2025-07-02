@@ -42,7 +42,7 @@ export function SettingsDialog(props: SettingsDialogProps) {
     <Dialog
       size={'lg'}
       {...props}
-      title={'Settings'}
+      title={'设置'}
       open={props.isOpen}
       onOpenChange={props.onOpenChange}
     >
@@ -54,7 +54,7 @@ export function SettingsDialog(props: SettingsDialogProps) {
                 <VStack spacing={'8'} flexGrow={1}>
                   <FlexField>
                     <FieldLabel size={'sm'} for={'theme'}>
-                      Theme
+                      主题
                     </FieldLabel>
                     <Group
                       orientation={
@@ -72,7 +72,7 @@ export function SettingsDialog(props: SettingsDialogProps) {
                           alignItems={'center'}
                           justifyContent={'spaceBetween'}
                         >
-                          <Text>Dark mode</Text>
+                          <Text>暗色模式</Text>
                           <div>
                             <SvgIcon
                               xmlns="http://www.w3.org/2000/svg"
@@ -95,7 +95,7 @@ export function SettingsDialog(props: SettingsDialogProps) {
                           alignItems={'center'}
                           justifyContent={'spaceBetween'}
                         >
-                          <Text>Light mode</Text>
+                          <Text>亮色模式</Text>
                           <div>
                             <SvgIcon
                               xmlns="http://www.w3.org/2000/svg"
@@ -122,7 +122,7 @@ export function SettingsDialog(props: SettingsDialogProps) {
                           alignItems={'center'}
                           justifyContent={'spaceBetween'}
                         >
-                          <Text>System</Text>
+                          <Text>系统</Text>
                           <div>
                             <SvgIcon viewBox="0 0 20 20" fill="currentColor">
                               <path
