@@ -65,7 +65,7 @@ export function TerminalControlField(
       onOpenChange={setOpen}
     >
       <SidebarPopoverTitle onClose={() => setOpen(false)}>
-        Window style
+        窗口样式
       </SidebarPopoverTitle>
       <For each={Object.values(terminalThemes.entries)}>
         {terminal => (
@@ -103,7 +103,7 @@ export function TerminalControlField(
           size={'md'}
           checked={props.showAccent}
           onChange={value => props.onShowAccentChange(value)}
-          label={'Show tab accent'}
+          label={'显示标签页高亮'}
         />
       </Box>
     </SidebarPopover>
