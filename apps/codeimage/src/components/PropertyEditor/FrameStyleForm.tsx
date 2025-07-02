@@ -81,7 +81,7 @@ export const FrameStyleForm: ParentComponent = () => {
         </TwoColumnPanelRow>
       </PanelRow>
 
-      <PanelRow for={'visibleField'} label={t('frame.visible')}>
+      <PanelRow for={'visibleField'} label="背景">
         <TwoColumnPanelRow>
           <SuspenseEditorItem
             fallback={<SkeletonLine width={'100%'} height={'26px'} />}
@@ -93,8 +93,8 @@ export const FrameStyleForm: ParentComponent = () => {
               value={frame.store.visible}
               onChange={frame.setVisibility}
               items={[
-                {label: t('common.yes'), value: true},
-                {label: t('common.no'), value: false},
+                {label: t('common.show'), value: true},
+                {label: t('common.hide'), value: false},
               ]}
             />
           </SuspenseEditorItem>

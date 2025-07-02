@@ -7,7 +7,7 @@ export default {
       opacity: '不透明度',
       radius: '圆角',
       color: '颜色',
-      background: '背景',
+      background: '背景颜色',
       terminal: '窗口',
       header: '标题栏',
       tabAccent: '标签页高亮',
