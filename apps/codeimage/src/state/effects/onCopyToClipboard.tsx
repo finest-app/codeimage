@@ -31,15 +31,24 @@ export const dispatchCopyToClipboard = effect<CopyToClipboardEvent>(
       ).pipe(
         switchMap(data => {
           if (!(data instanceof Blob)) return EMPTY;
+
           return from(
-            navigator.clipboard.write([
-              new ClipboardItem(
-                {
-                  [data.type]: data,
-                },
-                {presentationStyle: 'attachment'},
-              ),
-            ]),
+            window.utools
+              ? Promise.resolve(
+                  (async () => {
+                    const unit8Array = new Uint8Array(await data.arrayBuffer());
+
+                    window.utools.copyImage(unit8Array);
+                  })(),
+                )
+              : navigator.clipboard.write([
+                  new ClipboardItem(
+                    {
+                      [data.type]: data,
+                    },
+                    {presentationStyle: 'attachment'},
+                  ),
+                ]),
           ).pipe(
             tap(() => runWithOwner(owner, openSnackbar)),
             catchError(() => EMPTY),
