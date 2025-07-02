@@ -118,7 +118,7 @@ export function ExportPopoverContent() {
               checked={exportCanvasStore.get.showOnlyActiveTab}
               onChange={exportCanvasStore.setShowOnlyActiveTab}
               size={'md'}
-              label={'（导出）仅显示活动选项卡'}
+              label={'（导出）仅显示活动标签页'}
             />
           </VStack>
         </div>

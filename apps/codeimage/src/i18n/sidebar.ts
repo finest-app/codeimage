@@ -10,7 +10,7 @@ export default {
       background: '背景',
       terminal: '窗口',
       header: '标题栏',
-      tabAccent: '选项卡高亮',
+      tabAccent: '标签页高亮',
       watermark: '水印',
       shadows: '阴影',
       shadow: '阴影',
