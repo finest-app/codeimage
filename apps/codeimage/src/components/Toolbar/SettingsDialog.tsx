@@ -136,27 +136,6 @@ export function SettingsDialog(props: SettingsDialogProps) {
                       </RadioBlock>
                     </Group>
                   </FlexField>
-                  <FlexField size={'lg'}>
-                    <RadioList
-                      label={'Locale'}
-                      size={'md'}
-                      onChange={locale => {
-                        ui.setLocale(locale);
-                        getUmami().track('change-app-language', {locale});
-                      }}
-                      value={ui.get.locale}
-                      orientation={'vertical'}
-                    >
-                      <For each={locales}>
-                        {locale => (
-                          <RadioListItem
-                            label={t(`locales.${locale}`)}
-                            value={locale}
-                          />
-                        )}
-                      </For>
-                    </RadioList>
-                  </FlexField>
                 </VStack>
               </Match>
             </Switch>

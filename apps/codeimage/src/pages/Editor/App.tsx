@@ -18,7 +18,6 @@ import {Canvas} from '../../components/Scaffold/Canvas/Canvas';
 import {Sidebar} from '../../components/Scaffold/Sidebar/Sidebar';
 import {ThemeSwitcher} from '../../components/ThemeSwitcher/ThemeSwitcher';
 import {ExportButton} from '../../components/Toolbar/ExportButton';
-import {ExportInNewTabButton} from '../../components/Toolbar/ExportNewTabButton';
 import {ExportSettingsButton} from '../../components/Toolbar/ExportSettingsButton';
 import {FrameToolbar} from '../../components/Toolbar/FrameToolbar';
 import {ShareButton} from '../../components/Toolbar/ShareButton';
@@ -91,7 +90,6 @@ export function App() {
                     leftIcon={<SparklesIcon />}
                     onClick={() => getActiveEditorStore().format()}
                   />
-                  <ExportInNewTabButton canvasRef={frameRef()} />
                   <ExportButton canvasRef={frameRef()} />
                 </HStack>
               </Box>

@@ -6,7 +6,6 @@ import {createAsyncAction} from '@core/hooks/async-action';
 import {ColorSwatchIcon} from '../Icons/ColorSwatch';
 import {SparklesIcon} from '../Icons/SparklesIcon';
 import {CopyToClipboardButton} from './CopyToClipboardButton';
-import {ExportInNewTabButton} from './ExportNewTabButton';
 import {ExportSettingsButton} from './ExportSettingsButton';
 import * as styles from './FrameToolbar.css';
 
@@ -43,7 +42,6 @@ export function FrameToolbar(props: FrameToolbarProps) {
         >
           Format
         </Button>
-        <ExportInNewTabButton canvasRef={props.frameRef} size={'xs'} />
       </HStack>
     </div>
   );

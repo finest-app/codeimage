@@ -40,7 +40,6 @@ import {useHotkey} from '../../hooks/use-hotkey';
 import {AppLocaleEntries} from '../../i18n';
 import {DownloadIcon} from '../Icons/Download';
 import {ExclamationIcon} from '../Icons/Exclamation';
-import {HintIcon} from '../Icons/Hint';
 
 interface ExportButtonProps {
   canvasRef: HTMLElement | undefined;
@@ -144,12 +143,6 @@ export function ExportDialog(props: ExportDialogProps & DialogProps) {
     Math.round(window.devicePixelRatio),
   );
 
-  const modeItems = () =>
-    [
-      {label: t('export.exportMode'), value: ExportMode.export},
-      {label: t('export.shareMode'), value: ExportMode.share},
-    ] as SegmentedFieldItem<ExportMode>[];
-
   const extensionItems: SegmentedFieldItem<ExportExtension>[] = [
     {label: 'PNG', value: ExportExtension.png},
     {label: 'SVG', value: ExportExtension.svg},
@@ -197,41 +190,6 @@ export function ExportDialog(props: ExportDialogProps & DialogProps) {
       <DialogPanelContent>
         <DynamicSizedContainer>
           <VStack spacing={'6'}>
-            <Show when={supportWebShare()}>
-              <FlexField size={'lg'}>
-                <SegmentedField
-                  value={mode()}
-                  onChange={setMode}
-                  items={modeItems()}
-                  autoWidth
-                  size={'lg'}
-                />
-                <Show when={mode() === 'share'}>
-                  <Box marginTop={1}>
-                    <FieldLabelHint
-                      size={'sm'}
-                      weight={'normal'}
-                      icon={() => <HintIcon size={'sm'} />}
-                    >
-                      {t('export.shareHint')}
-                      &nbsp;
-                      <Link
-                        size={'sm'}
-                        underline
-                        weight={'medium'}
-                        target={'_blank'}
-                        href={
-                          'https://developer.mozilla.org/en-US/docs/Web/API/Navigator/share'
-                        }
-                      >
-                        Web Share API
-                      </Link>
-                    </FieldLabelHint>
-                  </Box>
-                </Show>
-              </FlexField>
-            </Show>
-
             <FlexField size={'md'}>
               <FieldLabel size={'sm'}>{t('export.extensionType')}</FieldLabel>
               <SegmentedField
