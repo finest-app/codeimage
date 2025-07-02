@@ -14,7 +14,6 @@ export interface BaseTerminalProps
   extends Omit<TerminalState, 'type'>,
     WithRef<'div'> {
   showTab: boolean;
-  readonlyTab: boolean;
   preview?: boolean;
   tabIcon?: LanguageIconDefinition['content'];
   onTabChange?: (tab: string) => void;

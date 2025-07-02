@@ -15,11 +15,7 @@ import {AppLocaleEntries} from '../../i18n';
 import {SparklesIcon} from '../Icons/SparklesIcon';
 import CustomEditor from './CustomEditor';
 
-interface CanvasEditorProps {
-  readOnly: boolean;
-}
-
-export default function CanvasEditor(props: CanvasEditorProps) {
+export default function CanvasEditor() {
   const [editorView, setEditorView] = createSignal<EditorView>();
   const activeEditorStore = getActiveEditorStore();
   const {
@@ -109,7 +105,6 @@ export default function CanvasEditor(props: CanvasEditorProps) {
     <CustomEditor
       onEditorViewChange={setEditorView}
       onValueChange={activeEditorStore.setCode}
-      readOnly={props.readOnly}
     />
   );
 }

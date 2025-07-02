@@ -4,9 +4,7 @@ import {withIndexedDbPlugin} from '@codeimage/store/plugins/withIndexedDbPlugin'
 import {toast} from '@codeimage/ui';
 import {createEffect, on, untrack} from 'solid-js';
 import {withAsyncAction} from 'statebuilder/asyncAction';
-import * as api from '../../data-access/preset';
 import {useIdb} from '../../hooks/use-indexed-db';
-import {getAuth0State} from '../auth/auth0';
 import {experimental__defineResource} from '../plugins/bindStateBuilderResource';
 import {withPresetBridge} from './bridge';
 import {Preset, PresetsArray} from './types';
@@ -14,35 +12,13 @@ import {Preset, PresetsArray} from './types';
 const idbKey = 'presets';
 const idb = useIdb();
 
-function mergeDbPresetsWithLocalPresets(
-  presets: Preset[],
-  localPresets: Preset[],
-) {
-  return [
-    ...localPresets.filter(
-      localPreset =>
-        !presets.find(preset => preset.data.localSyncId === localPreset.id),
-    ),
-    ...presets,
-  ];
-}
-
 async function fetchInitialState() {
-  const useInMemoryStore = !getAuth0State().loggedIn();
   const localPresets = await idb
     .get<PresetsArray>(idbKey)
     .then(data => data ?? ([] as PresetsArray))
     .catch(() => [] as PresetsArray);
 
-  return (
-    useInMemoryStore
-      ? Promise.resolve(localPresets)
-      : api
-          .getAllPresets({})
-          .then(presets =>
-            mergeDbPresetsWithLocalPresets(presets, localPresets),
-          )
-  ).catch(() => [] as PresetsArray);
+  return localPresets;
 }
 
 const PresetStoreDefinition = experimental__defineResource(fetchInitialState)

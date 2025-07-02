@@ -1,5 +1,4 @@
 import {createI18nContext, I18nContext, useI18n} from '@codeimage/locale';
-import {getAuth0State} from '@codeimage/store/auth/auth0';
 import {getRootEditorStore} from '@codeimage/store/editor';
 import {EditorConfigStore} from '@codeimage/store/editor/config.store';
 import {getThemeStore} from '@codeimage/store/theme/theme.store';
@@ -48,10 +47,6 @@ const tokens: ThemeProviderProps['tokens'] = {
   },
 };
 
-const Dashboard = lazyWithNoLauncher(
-  () => import('./pages/Dashboard/Dashboard'),
-);
-
 const Editor = () => {
   const Page = lazyWithNoLauncher(() => import('./pages/Editor/Editor'));
   getThemeStore().loadThemes();
@@ -75,44 +70,17 @@ export function Bootstrap() {
   getRootEditorStore();
   const [, {locale}] = useI18n();
   const uiStore = getUiStore();
-  const auth0 = getAuth0State();
   createEffect(on(() => uiStore.get.locale, locale));
   const mode = () => uiStore.currentTheme();
 
   const Routes = useRoutes([
     {
       path: '',
-      component: () => {
-        const state = getAuth0State();
-        return (
-          <Show fallback={<Editor />} when={state.loggedIn()}>
-            <Dashboard />
-          </Show>
-        );
-      },
-    },
-    {
-      path: ':snippetId',
       component: Editor,
     },
     {
       path: '404',
       component: NotFoundPage,
-    },
-    {
-      path: 'dashboard',
-      data: ({navigate}) => navigate('/'),
-      component: Dashboard,
-    },
-    {
-      path: 'login',
-      data: ({navigate}) => {
-        if (auth0.loggedIn()) {
-          navigate('/');
-        } else {
-          auth0.login();
-        }
-      },
     },
     {
       path: '/*all',
@@ -150,18 +118,13 @@ export function Bootstrap() {
   );
 }
 
-getAuth0State()
-  .initLogin()
-  .catch(() => null)
-  .then(() => {
-    render(
-      () => (
-        <I18nContext.Provider value={i18n}>
-          <StateProvider>
-            <Bootstrap />
-          </StateProvider>
-        </I18nContext.Provider>
-      ),
-      document.getElementById('root') as HTMLElement,
-    );
-  });
+render(
+  () => (
+    <I18nContext.Provider value={i18n}>
+      <StateProvider>
+        <Bootstrap />
+      </StateProvider>
+    </I18nContext.Provider>
+  ),
+  document.getElementById('root') as HTMLElement,
+);

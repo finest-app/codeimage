@@ -1,5 +1,3 @@
-import * as ApiTypes from '@codeimage/api/api-types';
-import {getAuth0State} from '@codeimage/store/auth/auth0';
 import {getRootEditorStore} from '@codeimage/store/editor';
 import {getFrameState} from '@codeimage/store/editor/frame';
 import {getTerminalState} from '@codeimage/store/editor/terminal';
@@ -8,7 +6,6 @@ import {appEnvironment} from '@core/configuration';
 import {createEffect, on} from 'solid-js';
 import {unwrap} from 'solid-js/store';
 import {makePlugin} from 'statebuilder';
-import * as api from '../../data-access/preset';
 import {useIdb} from '../../hooks/use-indexed-db';
 import {Preset, PresetData, PresetsArray} from './types';
 
@@ -19,7 +16,7 @@ export const withPresetBridge = (idbKey: string) =>
   makePlugin(
     store => {
       const idb = useIdb();
-      const useInMemoryStore = () => !getAuth0State().loggedIn();
+
       function persistToIdb(data: PresetsArray) {
         return idb.set(idbKey, unwrap(data)).then();
       }
@@ -28,9 +25,7 @@ export const withPresetBridge = (idbKey: string) =>
         on(
           store,
           resource => {
-            if (useInMemoryStore()) {
-              persistToIdb(resource ?? []);
-            }
+            persistToIdb(resource ?? []);
           },
           {defer: true},
         ),
@@ -73,55 +68,42 @@ export const withPresetBridge = (idbKey: string) =>
       };
 
       const bridge = {
-        useInMemoryStore,
         persistToIdb,
         getPresetDataFromState,
         isLocalPreset(preset: Preset) {
           return preset.id === preset.data.localSyncId;
         },
-
         canSyncPreset(preset: Preset) {
-          return !useInMemoryStore() && this.isLocalPreset(preset);
+          return true;
         },
-        addNewPreset(
-          name: string,
-          data?: PresetData & ApiTypes.CreatePresetApi['response']['data'],
-        ): Promise<Preset> {
+        addNewPreset(name: string, data?: PresetData): Promise<Preset> {
           const presetData: PresetData = data ?? getPresetDataFromState();
-          if (useInMemoryStore()) {
-            const id = generateUid();
-            presetData.localSyncId = id;
-            return Promise.resolve({
-              id,
-              name,
-              createdAt: new Date(),
-              updatedAt: new Date(),
-              version: 1,
-              data: presetData,
-            });
-          } else {
-            return api.createPreset({body: {name, data: presetData}});
-          }
+
+          const id = generateUid();
+
+          presetData.localSyncId = id;
+
+          return Promise.resolve({
+            id,
+            name,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            version: 1,
+            data: presetData,
+          });
         },
-        deletePreset(preset: Preset): Promise<Preset> {
-          const inMemory = useInMemoryStore() || this.isLocalPreset(preset);
-          return inMemory
-            ? Promise.resolve(preset)
-            : api.deletePreset({params: {id: preset.id}}).then(() => preset);
+        async deletePreset(preset: Preset): Promise<Preset> {
+          return preset;
         },
-        updatePreset(
+        async updatePreset(
           preset: Preset,
           name: string,
           data: PresetData,
         ): Promise<Preset> {
-          const inMemory = useInMemoryStore() || this.isLocalPreset(preset);
-          return inMemory
-            ? Promise.resolve({...preset, name, data})
-            : api.updatePreset({params: {id: preset.id}, body: {name, data}});
+          return {...preset, name, data};
         },
         reachPresetLimit() {
-          const limitPreset = () =>
-            useInMemoryStore() ? guestLimit : userLimit;
+          const limitPreset = () => guestLimit;
           return store()?.length >= limitPreset();
         },
       };

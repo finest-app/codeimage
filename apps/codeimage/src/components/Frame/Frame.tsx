@@ -23,7 +23,6 @@ interface FrameProps {
   radius: number;
   opacity: number;
   visible: boolean;
-  readOnly: boolean;
   aspectRatio: string | null | undefined;
   onWidthChange: (width: number) => void;
   onHeightChange: (height: number) => void;
@@ -141,7 +140,7 @@ export const Frame: ParentComponent<FrameProps> = props => {
           </Show>
         </div>
 
-        <Show when={modality === 'full' && !props.readOnly}>
+        <Show when={modality === 'full'}>
           <div class={styles.dragControls} use:exportExclude={true}>
             <div class={styles.dragControlLeft} onMouseDown={onResizeStart} />
             <div class={styles.dragControlRight} onMouseDown={onResizeStart} />

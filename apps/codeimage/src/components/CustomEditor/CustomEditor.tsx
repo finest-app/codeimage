@@ -27,13 +27,7 @@ import {
   rectangularSelection,
 } from '@codemirror/view';
 import {createCodeMirror, createEditorReadonly} from 'solid-codemirror';
-import {
-  createEffect,
-  createMemo,
-  createResource,
-  on,
-  VoidProps,
-} from 'solid-js';
+import {createEffect, createMemo, createResource, VoidProps} from 'solid-js';
 import {createTabIcon} from '../../hooks/use-tab-icon';
 
 const EDITOR_BASE_SETUP: Extension = [
@@ -58,7 +52,6 @@ const EDITOR_BASE_SETUP: Extension = [
 ];
 
 interface CustomEditorProps {
-  readOnly: boolean;
   onEditorViewChange?: (view: EditorView | undefined) => void;
   onValueChange?: (value: string) => void;
 }
@@ -170,7 +163,7 @@ export default function CustomEditor(props: VoidProps<CustomEditorProps>) {
     });
   };
 
-  createEditorReadonly(editorView, () => props.readOnly);
+  createEditorReadonly(editorView, () => false);
   createExtension(EditorView.lineWrapping);
   createExtension(() =>
     EditorView.contentAttributes.of({
@@ -205,15 +198,11 @@ export default function CustomEditor(props: VoidProps<CustomEditorProps>) {
 
   const reconfigureBaseSetup = createExtension(EDITOR_BASE_SETUP);
 
-  createEffect(
-    on(
-      () => props.readOnly,
-      readOnly => {
-        const extension = readOnly ? [] : EDITOR_BASE_SETUP;
-        reconfigureBaseSetup(extension);
-      },
-    ),
-  );
+  createEffect(() => {
+    const extension = EDITOR_BASE_SETUP;
+
+    reconfigureBaseSetup(extension);
+  });
 
   return (
     <code class={`language-${selectedLanguage()?.id ?? 'default'}`}>
