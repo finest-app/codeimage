@@ -8,7 +8,6 @@ import {Button} from '@codeui/kit';
 import {useModality} from '@core/hooks/isMobile';
 import {createSignal, lazy, onMount, Show, Suspense} from 'solid-js';
 import {BottomBar} from '../../components/BottomBar/BottomBar';
-import {Footer} from '../../components/Footer/Footer';
 import {FrameHandler} from '../../components/Frame/FrameHandler';
 import {FrameSkeleton} from '../../components/Frame/FrameSkeleton';
 import {PreviewFrame} from '../../components/Frame/PreviewFrame';
@@ -117,7 +116,6 @@ export function App() {
             <Show when={modality === 'full'} keyed={false}>
               <FrameToolbar frameRef={frameRef()} />
             </Show>
-            <Footer />
           </SuspenseEditorItem>
         </Canvas>
         <Show when={!readOnly()}>

@@ -1,5 +1,4 @@
 import {Box} from '@codeimage/ui';
-import {Footer} from '../../components/Footer/Footer';
 import {DashboardHeader} from './components/DashboardHeader/DashboardHeader';
 import {ProjectList} from './components/ProjectList/ProjectList';
 import {ProjectToolbar} from './components/ProjectToolbar/ProjectToolbar';
@@ -20,8 +19,6 @@ export function DashboardContent() {
               <ProjectList />
             </Box>
           </div>
-
-          <Footer />
         </div>
       </Box>
     </div>

@@ -8,10 +8,7 @@ import {useModality} from '@core/hooks/isMobile';
 import {Link as LocalLink} from '@solidjs/router';
 import {assignInlineVars} from '@vanilla-extract/dynamic';
 import {createMemo, Show, VoidProps} from 'solid-js';
-import {CodeImageLogoV2} from '../Icons/CodeImageLogoV2';
 import {CollectionIcon} from '../Icons/Collection';
-import {sidebarLogo} from '../Scaffold/Sidebar/Sidebar.css';
-import {UserBadge} from '../UserBadge/UserBadge';
 import {ExportButton} from './ExportButton';
 import {ShareButton} from './ShareButton';
 import * as styles from './Toolbar.css';
@@ -49,9 +46,6 @@ export function Toolbar(props: VoidProps<ToolbarProps>) {
       <div class={styles.wrapper}>
         <ToolbarSettingsButton />
         <Box display={'flex'} alignItems={'center'} marginLeft={5}>
-          <div class={sidebarLogo}>
-            <CodeImageLogoV2 height={26} withGradient={true} />
-          </div>
           <Show when={loggedIn() && modality === 'full'}>
             <Box marginLeft={16}>
               <Link
@@ -81,7 +75,6 @@ export function Toolbar(props: VoidProps<ToolbarProps>) {
 
               <ExportButton canvasRef={props.canvasRef} />
             </Show>
-            <UserBadge />
           </HStack>
         </Box>
       </div>

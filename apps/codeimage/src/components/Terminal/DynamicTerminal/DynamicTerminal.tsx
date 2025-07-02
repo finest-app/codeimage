@@ -1,11 +1,8 @@
-import {Box, FadeInOutTransition} from '@codeimage/ui';
 import {AVAILABLE_TERMINAL_THEMES} from '@core/configuration/terminal-themes';
 
 import {children, createMemo, JSXElement, ParentComponent} from 'solid-js';
 import {Dynamic} from 'solid-js/web';
 import {omitProps} from 'solid-use/props';
-import {CodeImageLogoV2} from '../../Icons/CodeImageLogoV2';
-import * as styles from '../terminal.css';
 import {BaseTerminalProps} from '../TerminalHost';
 
 interface DynamicTerminalProps extends BaseTerminalProps {
@@ -29,12 +26,6 @@ export const DynamicTerminal: ParentComponent<DynamicTerminalProps> = (
   return (
     <Dynamic component={terminal()} {...omitProps(props, ['type'])}>
       {resolvedChildren()}
-
-      <FadeInOutTransition show={props.showWatermark}>
-        <Box class={styles.watermark}>
-          <CodeImageLogoV2 width={125} withGradient={false} />
-        </Box>
-      </FadeInOutTransition>
     </Dynamic>
   );
 };

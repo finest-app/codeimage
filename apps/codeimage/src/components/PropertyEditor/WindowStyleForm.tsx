@@ -1,13 +1,11 @@
 import {useI18n} from '@codeimage/locale';
 import {getTerminalState} from '@codeimage/store/editor/terminal';
-import {VersionStore} from '@codeimage/store/version/version.store';
 import {createSelectOptions, Select} from '@codeui/kit';
 import {shadowsLabel} from '@core/configuration/shadow';
 import {getUmami} from '@core/constants/umami';
 import {SegmentedField} from '@ui/SegmentedField/SegmentedField';
 import {SkeletonLine} from '@ui/Skeleton/Skeleton';
 import {createMemo, ParentComponent, Show} from 'solid-js';
-import {provideState} from 'statebuilder';
 import {AppLocaleEntries} from '../../i18n';
 import {TerminalControlField} from './controls/TerminalControlField/TerminalControlField';
 import {PanelHeader} from './PanelHeader';
@@ -16,7 +14,6 @@ import {SuspenseEditorItem} from './SuspenseEditorItem';
 
 export const WindowStyleForm: ParentComponent = () => {
   const terminal = getTerminalState();
-  const versionStore = provideState(VersionStore);
   const [t] = useI18n<AppLocaleEntries>();
 
   const terminalShadows = createMemo(
@@ -83,11 +80,7 @@ export const WindowStyleForm: ParentComponent = () => {
       </PanelRow>
 
       <Show when={terminal.state.showHeader}>
-        <PanelRow
-          for={'frameTerminalTypeField'}
-          label={'Window'}
-          feature={'windowStylePicker'}
-        >
+        <PanelRow for={'frameTerminalTypeField'} label={'Window'}>
           <FullWidthPanelRow>
             <TerminalControlField
               showAccent={terminal.state.accentVisible}
@@ -167,11 +160,7 @@ export const WindowStyleForm: ParentComponent = () => {
           </SuspenseEditorItem>
         </TwoColumnPanelRow>
       </PanelRow>
-      <PanelRow
-        for={'frameSelectShadow'}
-        feature={'borderType'}
-        label={t('frame.border')}
-      >
+      <PanelRow for={'frameSelectShadow'} label={t('frame.border')}>
         <TwoColumnPanelRow>
           <SuspenseEditorItem
             fallback={<SkeletonLine width={'100%'} height={'24px'} />}
@@ -184,7 +173,7 @@ export const WindowStyleForm: ParentComponent = () => {
                 () => terminal.state.borderType ?? 'none',
                 border => {
                   const isNone = border === 'none';
-                  versionStore.see('borderType', false);
+
                   getUmami().track('change-border', {
                     border: border ?? 'none',
                   });
