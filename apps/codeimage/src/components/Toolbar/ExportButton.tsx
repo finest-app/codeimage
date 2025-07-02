@@ -21,7 +21,6 @@ import {
   DialogPanelFooter,
   DialogProps,
 } from '@codeui/kit';
-import {getUmami} from '@core/constants/umami';
 import {useModality} from '@core/hooks/isMobile';
 import {useWebshare} from '@core/hooks/use-webshare';
 import {DynamicSizedContainer} from '@ui/DynamicSizedContainer/DynamicSizedContainer';
@@ -159,10 +158,7 @@ export function ExportDialog(props: ExportDialogProps & DialogProps) {
 
     const selectedExtension = extension();
 
-    getUmami().track('export-confirm', {
-      mode: selectedMode,
-      extension: selectedExtension,
-    });
+ 
 
     props.onConfirm({
       type: selectedMode,

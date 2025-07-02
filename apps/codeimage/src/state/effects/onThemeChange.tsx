@@ -7,7 +7,6 @@ import {getTerminalState} from '@codeimage/store/editor/terminal';
 import {getThemeStore} from '@codeimage/store/theme/theme.store';
 import {TERMINAL_SHADOWS} from '@core/configuration/shadow';
 import {AVAILABLE_TERMINAL_THEMES} from '@core/configuration/terminal-themes';
-import {getUmami} from '@core/constants/umami';
 import {pipe, tap} from 'rxjs';
 
 export type DispatchUpdateThemeParams = {
@@ -38,7 +37,6 @@ export function dispatchUpdateTheme(params: DispatchUpdateThemeParams): void {
       terminal.setState('background', theme.properties.terminal.main);
       terminal.setState('textColor', theme.properties.terminal.text);
       editor.actions.setThemeId(theme.id);
-      getUmami().track('theme-change', {theme: theme.id});
     }
   });
 }

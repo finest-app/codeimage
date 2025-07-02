@@ -8,7 +8,6 @@ import {dispatchUpdateTheme} from '@codeimage/store/effects/onThemeChange';
 import {getThemeStore} from '@codeimage/store/theme/theme.store';
 import {createSelectOptions, NumberField, Select} from '@codeui/kit';
 import {appEnvironment} from '@core/configuration';
-import {getUmami} from '@core/constants/umami';
 import {DynamicSizedContainer} from '@ui/DynamicSizedContainer/DynamicSizedContainer';
 import {SegmentedField} from '@ui/SegmentedField/SegmentedField';
 import {SkeletonLine} from '@ui/Skeleton/Skeleton';
@@ -122,9 +121,6 @@ export const EditorStyleForm: ParentComponent = () => {
                       () => editor().languageId,
                       language => {
                         setLanguageId(language!);
-                        getUmami().track('change-language', {
-                          language: language!,
-                        });
                       },
                     )}
                     options={languagesOptions.options()}

@@ -8,7 +8,6 @@ import {useFilteredThemes} from '@codeimage/store/theme/useFilteredThemes';
 import {Box} from '@codeimage/ui';
 import {TextField} from '@codeui/kit';
 import {TERMINAL_SHADOWS} from '@core/configuration/shadow';
-import {getUmami} from '@core/constants/umami';
 import {useModality} from '@core/hooks/isMobile';
 import {assignInlineVars} from '@vanilla-extract/dynamic';
 import {
@@ -42,9 +41,6 @@ export const ThemeSwitcher: ParentComponent<ThemeSwitcherVariant> = props => {
 
   const onSelectTheme = (theme: CustomTheme) => {
     dispatchUpdateTheme({theme, updateBackground: true});
-    getUmami().track('theme-change', {
-      themeId: theme.id,
-    });
   };
   const exampleCode =
     '// Just a code example \n' +

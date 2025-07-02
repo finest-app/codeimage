@@ -3,7 +3,6 @@ import {useI18n} from '@codeimage/locale';
 import {getExportCanvasStore} from '@codeimage/store/canvas';
 import {getUiStore} from '@codeimage/store/ui';
 import {toast} from '@codeimage/ui';
-import {getUmami} from '@core/constants/umami';
 import {catchError, EMPTY, exhaustMap, from, pipe, switchMap, tap} from 'rxjs';
 import {getOwner, runWithOwner} from 'solid-js';
 import {exportSnippet} from '../../hooks/export-snippet';
@@ -44,7 +43,6 @@ export const dispatchCopyToClipboard = effect<CopyToClipboardEvent>(
           ).pipe(
             tap(() => runWithOwner(owner, openSnackbar)),
             catchError(() => EMPTY),
-            tap(() => getUmami().track('copy-to-clipboard')),
           );
         }),
       );

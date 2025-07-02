@@ -2,7 +2,6 @@ import {useI18n} from '@codeimage/locale';
 import {getTerminalState} from '@codeimage/store/editor/terminal';
 import {createSelectOptions, Select} from '@codeui/kit';
 import {shadowsLabel} from '@core/configuration/shadow';
-import {getUmami} from '@core/constants/umami';
 import {SegmentedField} from '@ui/SegmentedField/SegmentedField';
 import {SkeletonLine} from '@ui/Skeleton/Skeleton';
 import {createMemo, ParentComponent, Show} from 'solid-js';
@@ -87,9 +86,6 @@ export const WindowStyleForm: ParentComponent = () => {
               selectedTerminal={terminal.state.type}
               onTerminalChange={type => {
                 terminal.setType(type);
-                getUmami().track('change-terminal-type', {
-                  type,
-                });
               }}
               onShowAccentChange={terminal.setAccentVisible}
             />
@@ -147,9 +143,6 @@ export const WindowStyleForm: ParentComponent = () => {
               {...terminalShadowsSelect.controlled(
                 () => terminal.state.shadow ?? undefined,
                 shadow => {
-                  getUmami().track('change-shadow', {
-                    shadow: shadow ?? 'none',
-                  });
                   terminal.setShadow(shadow ?? null);
                 },
               )}
@@ -174,9 +167,6 @@ export const WindowStyleForm: ParentComponent = () => {
                 border => {
                   const isNone = border === 'none';
 
-                  getUmami().track('change-border', {
-                    border: border ?? 'none',
-                  });
                   terminal.setBorder(isNone ? null : border ?? null);
                 },
               )}

@@ -1,7 +1,6 @@
 import {useI18n} from '@codeimage/locale';
 import {getFrameState} from '@codeimage/store/editor/frame';
 import {RangeField} from '@codeimage/ui';
-import {getUmami} from '@core/constants/umami';
 import {SegmentedField} from '@ui/SegmentedField/SegmentedField';
 import {SkeletonLine, SkeletonVCenter} from '@ui/Skeleton/Skeleton';
 import {ParentComponent, Show} from 'solid-js';
@@ -148,7 +147,6 @@ export const FrameStyleForm: ParentComponent = () => {
               value={frame.store.aspectRatio}
               onChange={ratio => {
                 frame.setAspectRatio(ratio);
-                getUmami().track('aspect-ratio', {ratio: ratio ?? 'unset'});
               }}
             />
           </SuspenseEditorItem>
