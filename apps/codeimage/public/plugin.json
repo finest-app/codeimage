@@ -1,0 +1,14 @@
+{
+    "main": "index.html",
+    "logo": "logo.png",
+    "preload": "preload.js",
+    "features": [
+        {
+            "code": "main",
+            "explain": "轻松为你的代码创建优雅、可定制且专业感十足的截图。",
+            "cmds": [
+                "代码截图V2"
+            ]
+        }
+    ]
+}

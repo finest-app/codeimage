@@ -29,11 +29,6 @@
       "url": "https://riccardoperra.com"
     }
   ],
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "scripts": {
     "prepare": "husky install",
     "postinstall": "pnpm patch-solid-exports",

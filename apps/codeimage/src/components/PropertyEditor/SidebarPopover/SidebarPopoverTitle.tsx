@@ -1,12 +1,7 @@
-import {Box, HStack, Text} from '@codeimage/ui';
+import {Box, Text} from '@codeimage/ui';
 import {IconButton} from '@codeui/kit';
-import {
-  ExperimentalFeatureTooltip,
-  ExperimentalIcon,
-} from '@ui/ExperimentalFeatureTooltip/ExperimentalFeatureTooltip';
-import {FlowProps, Show} from 'solid-js';
+import {FlowProps} from 'solid-js';
 import {CloseIcon} from '../../Icons/CloseIcon';
-import * as styles from './SidebarPopover.css';
 
 interface SidebarPopoverTitleProps {
   onClose: () => void;
@@ -24,19 +19,7 @@ export function SidebarPopoverTitle(
       alignItems={'center'}
       marginBottom={4}
     >
-      <ExperimentalFeatureTooltip feature={props.featureName ?? 'This'}>
-        <HStack spacing={'2'} alignItems={'flexEnd'}>
-          <Text weight={'semibold'}>{props.children}</Text>
-          <Show when={props.experimental}>
-            <Text class={styles.experimentalFlag} size={'xs'}>
-              <Box as={'span'} display={'flex'} alignItems={'center'}>
-                <ExperimentalIcon size={'xs'} />
-                <Box marginLeft={'1'}>Experimental</Box>
-              </Box>
-            </Text>
-          </Show>
-        </HStack>
-      </ExperimentalFeatureTooltip>
+      <Text weight={'semibold'}>{props.children}</Text>
 
       <IconButton
         size={'xs'}

@@ -11,7 +11,6 @@ import {
 } from '@codeimage/ui';
 import '@codeimage/ui/themes/lightTheme';
 import {appEnvironment} from '@core/configuration';
-import {Router, useRoutes} from '@solidjs/router';
 import {snackbarHostAppStyleCss} from '@ui/snackbarHostAppStyle.css';
 import {setElementVars} from '@vanilla-extract/dynamic';
 import {Component, createEffect, lazy, on, Show, Suspense} from 'solid-js';
@@ -58,32 +57,12 @@ const Editor = () => {
   );
 };
 
-const NotFoundPage = lazyWithNoLauncher(
-  () => import('./pages/NotFound/NotFoundPage'),
-);
-
 export function Bootstrap() {
   getRootEditorStore();
   const [, {locale}] = useI18n();
   const uiStore = getUiStore();
   createEffect(on(() => uiStore.get.locale, locale));
   const mode = () => uiStore.currentTheme();
-
-  const Routes = useRoutes([
-    {
-      path: '',
-      component: Editor,
-    },
-    {
-      path: '404',
-      component: NotFoundPage,
-    },
-    {
-      path: '/*all',
-      data: ({navigate}) => navigate('/404'),
-      component: NotFoundPage,
-    },
-  ]);
 
   createEffect(
     on(mode, theme => {
@@ -103,11 +82,9 @@ export function Bootstrap() {
     <Scaffold>
       <CodeImageThemeProvider tokens={tokens} theme={mode()}>
         <SnackbarHost containerClassName={snackbarHostAppStyleCss} />
-        <Router>
-          <Suspense>
-            <Routes />
-          </Suspense>
-        </Router>
+        <Suspense>
+          <Editor />
+        </Suspense>
       </CodeImageThemeProvider>
       <SidebarPopoverHost />
     </Scaffold>

@@ -9,6 +9,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 import {withStaticVercelPreview} from '../../scripts/vercel-output-build';
 
 const config: UserConfigExport = defineConfig(({mode}) => ({
+  base: './',
   plugins: [
     {
       ...mdx({
